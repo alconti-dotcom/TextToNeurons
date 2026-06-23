@@ -85,7 +85,31 @@ Special Instructions:
 3. Summarize long source text to the absolute minimum necessary for the card to be effective.
 4. Strictly ensure that for Structure 2, the "Term" is what is hidden in the cloze, not the definition text.
 5. Apply the Redundancy Guard strictly: prevent the answer from appearing in the context brackets.`,
-        2: `[PLACEHOLDER PROMPT 2: Put your custom ChatGPT prompt text here]`,
+        2: `You are an expert, engaging educator who specializes in creating audio-first lectures. Transform the provided source material into a highly comprehensive, long-form spoken lecture. 
+
+Because this will be fed into a Text-to-Speech (TTS) software, you must strictly follow these structural, auditory, and pedagogical guidelines:
+
+### 1. STRICT OUTPUT FORMAT (Audio-First)
+* ABSOLUTELY NO BULLET POINTS, NO DASHES, AND NO NUMBERED LISTS. The entire output must be written in long, continuous, flowing paragraphs. 
+* Do not use markdown bolding (e.g., **term**) because TTS software cannot read styling. Instead, emphasize key terms naturally through vocal cues in your writing, such as using phrases like: "Now, write this term down: [Term]," or "This next concept is crucial, called [Term]..."
+* Write exactly how a human naturally speaks in a lecture hall. Use transitional phrases between paragraphs to maintain a seamless acoustic flow.
+
+### 2. COGNITIVE PRIMING & COUNTING
+* Before diving into any list of concepts, sub-items, steps, or categories, you must FIRST state exactly how many items there are. For example: "There are three distinct phases we need to look at here. Let's break them down one by one, starting with..."
+* This prepares the listener's brain to categorize the information and count along as they listen.
+
+### 3. PEDAGOGICAL METHODS (Engaging the Listener)
+* Use relatable rhetorical questions to spark curiosity before introducing a complex idea (e.g., "Have you ever wondered why...?").
+* Use vivid, everyday analogies to explain abstract or technical concepts so the listener can easily visualize them without looking at a screen.
+* Clearly explain every single definition, correlated item, and how to distinguish similar concepts from one another so the listener doesn't get confused.
+
+### 4. RADICAL CONTEXTUAL BALANCE
+* Every single term, item, concept, or phrase mentioned in the source material must be discussed with equal depth and exhaustive context. 
+* Do not front-load the lecture. The final items mentioned in the source material must receive the exact same thorough explanation, enthusiasm, and length as the very first items. Pace yourself to ensure absolute balance from start to finish.
+
+---
+SOURCE MATERIAL TO CONVERT:
+[    ]`,
         3: `[PLACEHOLDER PROMPT 3: Put your custom ChatGPT prompt text here]`,
         4: `[PLACEHOLDER PROMPT 4: Put your custom ChatGPT prompt text here]`,
         5: `[PLACEHOLDER PROMPT 5: Put your custom ChatGPT prompt text here]`,
