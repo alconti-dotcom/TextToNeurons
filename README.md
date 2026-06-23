@@ -39,7 +39,52 @@
 
     // Fallback original mock values
     const defaultPrompts = {
-        1: `[PLACEHOLDER PROMPT 1: Put your custom ChatGPT prompt text here`,
+        1: `Review Text: " [
+
+] "
+
+Task: Convert the provided material into concise Anki cloze deletion flashcards. You must categorize information into one of three specific "Types" while strictly adhering to the formatting and reference criteria below to ensure data integrity for Anki import.
+
+Formatting Criteria:
+- Construct a table with three columns: "Statements", "Notes", and "Number".
+- The "Notes" column MUST be present (2nd column) but kept COMPLETELY BLANK for every row.
+- The "Number" column must track the count of rows generated.
+
+Reference Criteria:
+- *DEFINITION PRIORITY*: When a sentence defines a concept, the cloze {{c1::}} MUST be placed on the *Term/Subject* being defined, NOT the description or action.
+- *TYPE 3 OVERRIDE (The Big Note Protocol)*: If the source text contains a table or a list of items with similar variables (e.g., several reagents with results, or indicators with ranges), you are FORBIDDEN from creating individual rows. You MUST group the entire set into ONE single row/cell.
+- *Standalone Context*: Every statement must be able to stand alone; include the subject or umbrella category in the text (use parenthesis or brackets).
+- *REDUNDANCY GUARD*: If the Term/Subject is clozed, the text in (parenthesis) MUST be the *General Category* or *Umbrella Term*, not the term itself. (e.g., Use "(INTERMOLECULAR FORCES) {{c1::Van der Waals forces}}" instead of "(VAN DER WAALS FORCES) {{c1::Van der Waals forces}}").
+- *Anki Markup*: Use {{c1::word}} for clozes and \n for line breaks within a single table cell.
+
+---
+Structure 1: MULTIPLE ENUMERATION (Simple Lists)
+- Use for: General "Types of X" or "Steps in Y."
+- Format: [Umbrella Term] (Number) {{c1::• Item 1 \n • Item 2}}
+- Example: METHODS OF ANALYSIS (4) {{c1::• Volumetric \n • Gravimetric \n • Special \n • Instrumental}}
+
+Structure 2: INDIVIDUAL (Standalone Term-to-Definition)
+- Use for: Unique facts that do NOT belong to a repetitive data set or table.
+- Logic: Cloze the *Concept Name/Term*. 
+- Example: (METHODS OF ANALYSIS) {{c1::Volumetric Analysis}} involves the determination of the volume of a solution of known concentration.
+
+Structure 3: CORRELATION (The "Big Note" Protocol)
+- Use for: ALL tables, linked pairs, and repetitive data sets (e.g., Indicators, Test Results, Reagents).
+- MANDATORY: Every entry in the set must be in ONE single row/cell. Use \n • to separate lines.
+- Format: [Subject Header] \n • {{c1::Term}} = {{c2::Result/Value}}
+- Example: 
+[QUALITATIVE TEST RESULTS]
+• {{c1::Carbon & hydrogen}} + lime water = {{c2::turbid (CaCO₃ precipitate)}}
+• {{c1::Nitrogen}} (soda lime test) = {{c2::pungent odor}}
+• {{c1::Halogens}} (Beilstein test) = {{c2::green flame}}
+---
+
+Special Instructions:
+1. *CRITICAL*: Maintain the 3-column table format with a blank 'Notes' column at all times.
+2. Do not split Table data (e.g., Table 3.1, 3.2) into separate rows. One table = One row.
+3. Summarize long source text to the absolute minimum necessary for the card to be effective.
+4. Strictly ensure that for Structure 2, the "Term" is what is hidden in the cloze, not the definition text.
+5. Apply the Redundancy Guard strictly: prevent the answer from appearing in the context brackets.`,
         2: `[PLACEHOLDER PROMPT 2: Put your custom ChatGPT prompt text here]`,
         3: `[PLACEHOLDER PROMPT 3: Put your custom ChatGPT prompt text here]`,
         4: `[PLACEHOLDER PROMPT 4: Put your custom ChatGPT prompt text here]`,
