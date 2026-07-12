@@ -56,13 +56,13 @@ Reference Criteria:
 - *TYPE 3 OVERRIDE (The Big Note Protocol)*: If the source text contains a table or a list of items with similar variables (e.g., several reagents with results, or indicators with ranges), you are FORBIDDEN from creating individual rows. You MUST group the entire set into ONE single row/cell.
 - *Standalone Context*: Every statement must be able to stand alone; include the subject or umbrella category in the text (use parenthesis or brackets).
 - *REDUNDANCY GUARD*: If the Term/Subject is clozed, the text in (parenthesis) MUST be the *General Category* or *Umbrella Term*, not the term itself. (e.g., Use "(INTERMOLECULAR FORCES) {{c1::Van der Waals forces}}" instead of "(VAN DER WAALS FORCES) {{c1::Van der Waals forces}}").
-- *Anki Markup*: Use {{c1::word}} for clozes and \n for line breaks within a single table cell.
+- *Anki Markup*: Use {{c1::word}} for clozes and \\n for line breaks within a single table cell.
 
 ---
 Structure 1: MULTIPLE ENUMERATION (Simple Lists)
 - Use for: General "Types of X" or "Steps in Y."
-- Format: [Umbrella Term] (Number) {{c1::• Item 1 \n • Item 2}}
-- Example: METHODS OF ANALYSIS (4) {{c1::• Volumetric \n • Gravimetric \n • Special \n • Instrumental}}
+- Format: [Umbrella Term] (Number) {{c1::• Item 1 \\n • Item 2}}
+- Example: METHODS OF ANALYSIS (4) {{c1::• Volumetric \\n • Gravimetric \\n • Special \\n • Instrumental}}
 
 Structure 2: INDIVIDUAL (Standalone Term-to-Definition)
 - Use for: Unique facts that do NOT belong to a repetitive data set or table.
@@ -71,8 +71,8 @@ Structure 2: INDIVIDUAL (Standalone Term-to-Definition)
 
 Structure 3: CORRELATION (The "Big Note" Protocol)
 - Use for: ALL tables, linked pairs, and repetitive data sets (e.g., Indicators, Test Results, Reagents).
-- MANDATORY: Every entry in the set must be in ONE single row/cell. Use \n • to separate lines.
-- Format: [Subject Header] \n • {{c1::Term}} = {{c2::Result/Value}}
+- MANDATORY: Every entry in the set must be in ONE single row/cell. Use \\n • to separate lines.
+- Format: [Subject Header] \\n • {{c1::Term}} = {{c2::Result/Value}}
 - Example: 
 [QUALITATIVE TEST RESULTS]
 • {{c1::Carbon & hydrogen}} + lime water = {{c2::turbid (CaCO₃ precipitate)}}
@@ -120,7 +120,7 @@ SOURCE MATERIAL TO CONVERT:
 *   **Information Density:** Ensure all technical terms, instructions, and data points are paired with relevant visual cues (e.g., charts, process arrows, timelines, or diagrams) so the final output is informative and complete.
 
 ### 2. Design & Configuration Preferences
-*   **Color Palette:** [  COLORS ]
+*   **Color Palette:** [   COLORS ]
 *   **Style:** Clean, professional, and high-contrast for maximum readability.`,
         4: `[PLACEHOLDER PROMPT 4: Put your custom ChatGPT prompt text here]`,
         5: `[PLACEHOLDER PROMPT 5: Put your custom ChatGPT prompt text here]`,
@@ -323,6 +323,8 @@ SOURCE MATERIAL TO CONVERT:
         });
     };
 
+    // Fire application engine initialization on load sequence
     window.addEventListener('DOMContentLoaded', checkIncomingScan);
 </script>
 </body>
+</html>
