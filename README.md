@@ -112,15 +112,13 @@ SOURCE MATERIAL TO CONVERT:
 [    ]`,
         3: `Act as an expert educational infographic designer. Your task is to transform the provided lesson material into a highly comprehensive, visually structured layout optimized for an infographic generator. 
 
-### 1. Source Material to Process
-[ LESSON  ]
 
-### 2. Visual & Formatting Requirements
+### 1. Visual & Formatting Requirements
 *   **Complete Coverage:** Create specific illustrations, icons, or visual layouts for every single activity, game, bullet point, and core concept present in the source material. Do not summarize or omit key details.
 *   **Structural Clarity:** Group related ideas into clear visual sections, blocks, or steps to map out the lesson flow logically.
 *   **Information Density:** Ensure all technical terms, instructions, and data points are paired with relevant visual cues (e.g., charts, process arrows, timelines, or diagrams) so the final output is informative and complete.
 
-### 3. Design & Configuration Preferences
+### 2. Design & Configuration Preferences
 *   **Color Palette:** [  COLORS ]
 *   **Style:** Clean, professional, and high-contrast for maximum readability.`,
         4: `[PLACEHOLDER PROMPT 4: Put your custom ChatGPT prompt text here]`,
