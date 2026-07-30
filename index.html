@@ -124,7 +124,45 @@ SOURCE MATERIAL TO CONVERT:
 ### 2. Design & Configuration Preferences
 *   **Color Palette:** [   COLORS ]
 *   **Style:** Clean, professional, and high-contrast for maximum readability.`,
-        4: `[PLACEHOLDER PROMPT 4: Put your custom ChatGPT prompt text here]`,
+        4: `Table generator
+
+Source Material: " [PASTE YOUR MATERIAL HERE] "
+
+Task: Convert the provided study material into a highly compact, hierarchical "Cheat Sheet" table designed for rapid exam review. Map the information using a multi-level cascading structure that moves from broad concepts on the left to granular details on the right.
+
+Formatting Criteria:
+- Construct a Markdown table with dynamic columns labeled by level: Level 1 (Major Domain/Topic), Level 2 (Sub-categories/Umbrellas), Level 3 (Specific Concepts/Processes), Level 4 (Sub-steps/Components), Level 5 (Variables/Conditions), Level 6 (Examples/Reagents/Formulas), up to Level 7 (Exceptions/Notes) if necessary based on material complexity.
+- *Cascading Layout (Least-to-Most Filled)*:
+  - *Level 1 (Column 1)*: Contains ONLY major overarching headings/topics. Leave cells empty on subsequent rows under the same topic until a new major topic begins.
+  - *Level 2 (Column 2)*: Contains sub-categories under Level 1. Keep empty for lower-level rows within the same sub-category.
+  - *Level 3+*: Continue expanding rightsward into finer details. Higher-level parent cells must remain BLANK on secondary rows to maintain visual grouping and prevent redundant text.
+
+Reference Criteria & Content Rules:
+- *Conciseness*: Summarize all content to essential keywords, short definitions, formulas, or short phrases without fluff.
+- *Distinguishability*: Items sharing a parent node MUST be clearly differentiated by unique characteristics, key defining features, or explicit examples.
+- *Completeness*: Retain critical technical data including exact formulas, paired terms/correlations (e.g., Reagent = Result), and sequence steps.
+- *Sub-level Grouping (.1, .2, .3 variations)*: When a single concept has multiple distinct examples, process steps, or conditions, keep the higher-level parent cells blank while creating new sub-rows in the rightward columns.
+- *No Dense Walls of Text*: Do NOT condense all information into a single row or cell. Use discrete rows for each sub-element.
+
+---
+
+Example Output Structure:
+
+| Level 1 (Topic) | Level 2 (Sub-Category) | Level 3 (Concept/Step) | Level 4 (Details/Formula) | Level 5 (Examples/Results) |
+|---|---|---|---|---|
+| Gravimetric Analysis | Physical Methods | Volumetric prep | Evaporation to dryness | Recover residue |
+| | Chemical Methods | Precipitation | Addition of precipitant | Form insoluble salt |
+| | | Volatilization | Mass loss measurement | Water content in hydrate |
+| Qualitative Tests | Alkaloid Reagents | Mayer's Reagent | Mercuric Potassium Iodide | White/slightly yellow ppt |
+| | | Wagner's Reagent | Iodine in KI solution | Reddish-brown ppt |
+| | | Dragendorff's | Potassium Bismuth Iodide | Orange ppt |
+
+---
+
+Special Instructions:
+1. Ensure higher-level parent cells stay empty on child rows so the visual hierarchy is immediately obvious at a glance.
+2. Every row must retain sufficient horizontal context through its alignment under parent categories—do not orphan details without a clear pathway back to Level 1.
+3. Keep mathematical and chemical formulas strictly intact.`,
         5: `[PLACEHOLDER PROMPT 5: Put your custom ChatGPT prompt text here]`,
         6: `[PLACEHOLDER PROMPT 6: Put your custom ChatGPT prompt text here]`,
         7: `[PLACEHOLDER PROMPT 7: Put your custom ChatGPT prompt text here]`,
