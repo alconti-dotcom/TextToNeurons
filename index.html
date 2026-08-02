@@ -354,7 +354,7 @@ Special Instructions:
 
     // Card fallback manual backup option
     window.manualCopy = function(id) {
-        const text = (id == 1) ? defaultPrompts[1] : promptDatabase[id];
+        const text = promptDatabase[id] || defaultPrompts[id];
         navigator.clipboard.writeText(text).then(() => {
             statusAlert.className = "mb-6 p-4 rounded-xl text-center font-medium border text-sm bg-[#1b2b24] border-[#2e5c44] text-[#a3e635]";
             statusMessage.innerHTML = `<i class="fa-solid fa-circle-check mr-2"></i> Prompt #${id} manual copy successful!`;
