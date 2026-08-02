@@ -188,7 +188,7 @@ Special Instructions:
             block.className = "bg-[#161b26] border border-[#26354a] rounded-xl p-5 hover:border-[#3b5273] transition-all relative group";
             
             // Check display text: If it's Slot 1, always reflect the defaultPrompts version on interface
-            const displayText = (id == 1) ? defaultPrompts[1] : promptDatabase[id];
+            const displayText = promptDatabase[id] || defaultPrompts[id];
             
             if (isAdminAuthenticated) {
                 // Editable Content Formats for Administrators
@@ -343,7 +343,7 @@ Special Instructions:
 
     // Secure execution context tied directly to button click handler
     window.executeSecureCopy = function(id) {
-        const text = (id == 1) ? defaultPrompts[1] : promptDatabase[id];
+        const text = promptDatabase[id] || defaultPrompts[id];
         navigator.clipboard.writeText(text).then(() => {
             document.getElementById('gestureOverlay').remove();
             statusAlert.className = "mb-6 p-4 rounded-xl text-center font-medium border text-sm bg-[#1b2b24] border-[#2e5c44] text-[#a3e635]";
