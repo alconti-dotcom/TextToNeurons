@@ -92,10 +92,9 @@ Special Instructions:
 Because this will be fed into a Text-to-Speech (TTS) software, you must strictly follow these structural, auditory, and pedagogical guidelines:
 
 ### 1. STRICT OUTPUT FORMAT (Audio-First)
-* ABSOLUTELY NO BULLET POINTS, NO DASHES, AND NO NUMBERED LISTS. The entire output must be written in long, continuous, flowing paragraphs. 
+* ABSOLUTELY NO BULLET POINTS, NO DASHES, AND NO NUMBERED LISTS. The entire output must be written in long, continuous, flowing paragraphs inside a code box. 
 * Do not use markdown bolding (e.g., **term**) because TTS software cannot read styling. Instead, emphasize key terms naturally through vocal cues in your writing, such as using phrases like: "Now, write this term down: [Term]," or "This next concept is crucial, called [Term]..."
 * Write exactly how a human naturally speaks in a lecture hall. Use transitional phrases between paragraphs to maintain a seamless acoustic flow.
-* The whole text output must be placed in a code box rather than the ai platform's response text format.
 
 ### 2. COGNITIVE PRIMING & COUNTING
 * Before diving into any list of concepts, sub-items, steps, or categories, you must FIRST state exactly how many items there are. For example: "There are three distinct phases we need to look at here. Let's break them down one by one, starting with..."
@@ -110,9 +109,28 @@ Because this will be fed into a Text-to-Speech (TTS) software, you must strictly
 * Every single term, item, concept, or phrase mentioned in the source material must be discussed with equal depth and exhaustive context. 
 * Do not front-load the lecture. The final items mentioned in the source material must receive the exact same thorough explanation, enthusiasm, and length as the very first items. Pace yourself to ensure absolute balance from start to finish.
 
+### 5. INTERACTIVE OVERVIEW OFFER
+After generating and placing the primary long-form lecture inside a code box, ask the user the following exact prompt outside the box:
+
+"Send overview? Regenerate the content from the initial code box into a high-level overview version following these specific parameters:
+* **Purpose:** Help the listener get a clear, general vision of the bigger picture of the whole lesson before diving into deep details.
+* **Format & Flow:** Move from the most general delivery of the lesson to the specific, stopping just before the detail level becomes identical to the main lecture code box.
+* **Enumeration Focus:** Focus on enumerating and counting items rather than giving full definitions.
+* **Length:** Provide a shortened, condensed version of the first code box output.
+* **Teasing Value over Explaining:** Still cover the entire material, but tease what to expect from the main lecture instead of explicitly explaining concepts. Tease concepts by stating in what terms an item differs from others, noting that an item has an inherent value, stating that there is a specific factor that creates it, or mentioning that something unique gives it its meaning (adapt this teasing style depending on the characteristics of each item).
+* **Handling Complex Sets:** If each member of a group of characteristics (e.g., pros, cons, disadvantages, advantages, steps) is long or multi-worded, simply state explicitly how many items there are in that group, unless that group contains multiple branching sets of sub-information underneath it."
+
+If the user agrees, resend the output converted into an overview version in a new code box where the following rules apply:
+A. Focuses on enumerating and counting items rather than giving definitions.
+B. A shortened version of the first code box output.
+C. Starts from the most general delivery of the lesson to the specific, only stopping when it’s getting identical to the first code box output.
+D. Still covers the whole material but leaves out what should one expect from the first code box by saying in what terms is it different from the other terms/saying that it has an inherent value about it/saying that it has something that makes it/ saying that there’s something that gives it its meaning; rather than explicitly saying them (Can have multiple depending on the characteristics of that item in the first code box output).
+E. If each member of a group of characteristics (e.g. pros, cons, disadvantages, advantages, steps) that are given are too long/has multiple words each, it will just be explicitly mentioned how many they are, unless it has more branching multiple sets of branching informations under it.
+F. Its purpose is to help one get a general vision of the bigger picture of the whole lesson.
+
 ---
 SOURCE MATERIAL TO CONVERT:
-[    ]`,
+[Paste your text, transes, passages, or notes here]`,
         3: `Act as an expert educational infographic designer. Your task is to transform the provided lesson material into a highly comprehensive, visually structured layout optimized for an infographic generator. 
 
 
