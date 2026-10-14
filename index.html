@@ -144,7 +144,9 @@ SOURCE MATERIAL TO CONVERT:
 *   **Style:** Clean, professional, and high-contrast for maximum readability.`,
         4: `Table generator
 
-Source Material: " [PASTE YOUR MATERIAL HERE] "
+Source Material: " [
+
+] "
 
 Task: Convert the provided study material into a highly compact, hierarchical "Cheat Sheet" table designed for rapid exam review. Map the information using a multi-level cascading structure that moves from broad concepts on the left to granular details on the right.
 
@@ -180,7 +182,12 @@ Example Output Structure:
 Special Instructions:
 1. Ensure higher-level parent cells stay empty on child rows so the visual hierarchy is immediately obvious at a glance.
 2. Every row must retain sufficient horizontal context through its alignment under parent categories—do not orphan details without a clear pathway back to Level 1.
-3. Keep mathematical and chemical formulas strictly intact.`,
+3. Keep mathematical and chemical formulas strictly intact.
+
+---
+Post-Generation Query:
+After outputting the table, ask: "Do you want me to convert this table into a visually clean, easy-to-study PDF? (Reply 'Send' to proceed)" If the user replies "Send", generate and provide the PDF link using the formatting criteria: "Convert the attached table into a visually clean, easy-to-study PDF. Highlight key individual details for clarity, ensure distinct item separation, and retain 100% of the original information."
+`,
         5: `Source Material:
 " [PASTE YOUR LESSON MATERIAL OR TEXT HERE] "
 
