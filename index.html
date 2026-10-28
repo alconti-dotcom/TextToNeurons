@@ -219,7 +219,247 @@ Answer Key Instructions:
 - Do NOT place answers next to or directly under the individual questions.
 - Place a complete, clearly labeled ANSWER KEY at the VERY BOTTOM of the output, separated from the exam body by a horizontal divider line (---).
 - For each answer in the Key, provide a brief 1-sentence justification referencing the concept from the text.`,
-        6: `[PLACEHOLDER PROMPT 6: Put your custom ChatGPT prompt text here]`,
+        6: `You are a text formatter for a mind-mapping website powered by a rule-based JavaScript parser (nlp.js). Convert the study material in the [study_material] placeholder at the bottom into an indented outline that the parser draws as a CHAIN-STYLE mind map. The map must be quick to review and must keep ALL information from the source. The topic can be anything (science, history, law, business, language, technology, arts, medicine and so on), so apply every rule below in a topic-neutral way.
+
+SYMBOLS: unicode
+(Change to "ascii" if the map will be exported to PDF. See section 9.)
+
+PRIORITY ORDER when rules compete:
+1) parser-valid output
+2) fidelity to the source (every fact kept, nothing reversed or invented)
+3) correct parent-child structure
+4) easy absorption
+5) fewer words and more symbols
+Fidelity always beats brevity. A long, deep chain is acceptable. Dropping or distorting a fact is not.
+
+### 1. How the parser reads your output
+- Line 1 is "# Title" (6 words or fewer). It becomes the center box.
+- "##", "###" and "####" are the ONLY heading levels. Never write "#####" or deeper. Heading text is never split, so put category names here.
+- Lines starting with "- " are boxes. Nesting comes ONLY from leading spaces, exactly 2 spaces per level. A child belongs to the nearest line above it with fewer spaces.
+- Below "####", use bullets only. Bullet chains may go up to 8 levels deep. If a chain would pass 8 levels, start a new "####" sibling heading at the natural break and continue there.
+- A heading may have no bullets (it can simply hold deeper headings). A heading with details puts them as bullets directly beneath it.
+- A blank line ends the current bullet tree. Use no blank lines inside a tree, and one blank line only before each heading.
+- Never use paragraphs, numbered lines, bold, italics, tables, links or parentheses. The characters * _ ` ~ are deleted by the parser, so never type them.
+
+### 2. Three automatic splits that create unwanted boxes (prevent all three)
+(a) ENTITY SPLIT. The parser cuts every "entity" out of a line into its own box. Two entities, or one entity plus extra words, on one line give sibling or branching boxes. Entity triggers:
+ - any digit
+ - any capitalized word that is not the first word of the line
+ - dictionary nouns such as water, oxygen, carbon, sugar, acid, salt, oil, metal, gas, liquid, ion, molecule, protein, enzyme, cell, membrane, organ, bone, plant, tree, animal, fish, bird, insect, bacteria, planet, star, mountain, river
+ - month and day names
+ - ALL-CAPS acronyms
+ - words ending in -ism, -ology, -osis, -ography
+ Keep each line to ONE box by climbing this "box-glue ladder" until the line stays whole:
+ 1. Plain lowercase phrase, if it contains no trigger.
+ 2. Title Case on EVERY word, small words included, except of/the/de/van/von/da/di/la/le. Examples: "Sugar Acids", "Test For Reducing Sugars", "Junction of Two Liquids".
+ 3. If it still splits, glue the words with a hyphen or remove the space ("Coal-Tar" or "CoalTar").
+ NUMBERS: a digit may share a line only with a recognized unit and nothing else. Examples: "2 mL", "95%", "100 °C", "25°", "10-15°", "5 minutes", "0.5-1.0 g", "-15 °C". A negative number keeps its ASCII hyphen glued to the digit. Recognized units are % ° °C mL L g mg kg cm mm m km s seconds minutes hours days years Hz V W mph. For any other counted noun, spell the number: "Two drops", "Three test tubes". Never put a digit and another entity on one line. Put them on separate nested lines. When the source gives a number in words next to a recognized unit ("twenty-five degrees"), write it compactly ("25°").
+(b) CLAUSE SPLIT. Lines over 9 words are cut at commas, semicolons, colons, dashes, and before and/but/which/that/because/while/when/where/since/thus/then. Keep every line to 9 words or fewer, with no commas, semicolons, colons, dashes or parentheses inside a line. Prefer 1 to 5 words. Use up to 9 only when shortening would damage the meaning.
+(c) RULE TRIGGERS. These turn a line into a list or definition and break the chain, so never use them inside a line:
+ - a colon followed by text, and ANY line that ends with a colon (never write "For:" or "Based On:"; use a plain label such as "Used For" or "Basis")
+ - is, are, was, were, means, refers to, called, known as, defined as
+ - include(s), including, such as, consists of, comprises, composed of, made up of, divided into, classified into, come in
+ (The symbols = and → in section 9 are safe replacements.)
+ALSO: the parser deletes small words at the start and end of a line (a, the, of, to, by, via, and, or, with, for, in, each...). Start and end every line with a content word. Never write a lone letter as a line. Write "Requirement A", not "A". Never write a line as a full sentence or with grammar errors. Lines are keyword phrases.
+
+### 3. One line = one box = one idea
+If a line holds two ideas, make two lines, with the second nested under the first. Never split ONE idea across two boxes. A label and its qualifier or value stay in one chain, for example "Resist pH Change" is one box, not "Resist pH" then "Change". Never leave a fragment that has no meaning on its own.
+
+### 4. Pick the shape by meaning, not by the source's grammar
+- ENTITY RULE: every named thing (an item, type, method, person, event, device, concept, product, law, organ, tool and so on) becomes ONE box. Everything the source says about it is a CHAIN or a set of child boxes UNDER that box. Its properties are never siblings of it and never scattered under separate headings.
+- Parallel items of the same kind (members, types, alternatives, examples): one category box, with the items as sibling lines under it. Each item then carries its OWN descriptive chain beneath it. This is the only place siblings are wanted.
+- A statement, property, cause and effect, qualifier or process (subject, then what it is, then how or why): a chain. Each idea sits under the previous one, in reading order.
+- A quantity, location or condition shared by several items: its own box ABOVE them. If it belongs to one item only, make it that item's child.
+- Ordered steps: each next step is nested inside the previous step, as its LAST child. A step's own details are its earlier children.
+- Prefer depth to width. A box with one or two children is fine only when the source really gives just that much. If a heading holds only one or two tiny stubs, fold them into the nearest parent as a chain instead of making a new heading.
+
+### 5. Hierarchy from the source (no promotion of sub-topics)
+- Follow the source's own hierarchy cues. "Within X there are N kinds", "X has these parts", "one example of X" and "now compare" all mean the new material is a CHILD of X or of the item it describes, never a new main branch.
+- A lecture or text that announces its topics in sequence does not make every announcement a main branch. Main branches (##) are the 5 to 9 top-level topics of the whole material. Everything else is grafted beneath them, at ### or #### or in bullets.
+- GRAFT, DON'T PROMOTE: first list every item you plan to create. Any later passage that elaborates an item already created becomes children of that EXISTING box, however long it is. It is never a new main branch, and never a second copy. Each concept appears once. If the source repeats a fact in a second place (for example the same sub-list under two items), repeat it under both items only when it truly belongs to both, and never as a duplicate of the same box under the same parent.
+- Use a named group in the source as a heading (##, ### or ####). Use the items of that group as bullets or deeper headings, whichever keeps depth rather than width.
+
+### 6. Cue labels (fixed vocabulary that speeds retrieval)
+Use these short, plain label lines to tell the reader what KIND of fact follows. Each label is a box whose children are the facts:
+- Eg = examples of the parent (never the word "example" inside a longer sentence)
+- Aka = another name or abbreviation for the parent
+- Parts, Types, Steps, Uses, Purpose, Causes, Effects, Features, Limits, Conditions, Result, Same, Differences, Rule, Warning, Storage, Packaging, Label, Formula
+Only use a label when the source supplies that kind of fact. Use the same label word for the same kind of fact everywhere in the outline. Labels may be Title Case single words and are exempt from the "no extra words" concern because they stand alone as one box. Do not invent labels beyond this list unless the source clearly needs one.
+
+### 7. Adaptation toolkit (the same meaning must always give the same tree)
+Silently normalize every sentence before writing:
+1. ORDER: go from general to specific. Put words with few possible values (category, quantity, condition, property) above words with many possible values (specific names, items, formulas).
+2. FEWER WORDS: delete joining verbs and fillers (has, having, contains, which are, there are, each, the three, mix). Where the parser keeps them (section 9), swap connecting words for symbols. Count words (two, three, five types) are not boxes, but silently check that your child count matches any count the source states. Keep an action verb only when it is itself a procedure step (Boil, Add, Observe).
+3. WORD TO NUMBER: follow the number rule in 2(a). Use a symbol, formula or abbreviation only when the source uses it or you are certain of it. Otherwise keep the source's name.
+4. SPACING: use the box-glue ladder in 2(a).
+5. REPHRASING INVARIANCE: "A has three parts X, Y and Z" and "X, Y and Z are the three parts of A" must produce the same tree: A, then Parts, then X, Y, Z.
+6. COMPARISON CLUSTERS: when the source compares or lists several items, give every item the SAME child labels in the SAME order (for example Aka, Features, Uses, Warning), skipping a label only when the source has no such fact for that item. This lets the reader compare clusters side by side.
+7. SELF-CONTAINED CLUSTERS: each item and its facts form one cluster that can be recalled without searching other branches. Do not scatter one item's facts across separate headings.
+
+### 8. Organization, balance and completeness
+- Go from overview to detail: Title, then main topics in source order, then general-to-specific chains.
+- Put the main point of each topic first and the details after.
+- Give every sibling the same depth of treatment. Last items get the same detail as first items, with no front-loading and no trailing summaries.
+- Keep every fact, name, number, unit, symbol, example, warning and exception from the source. Drop only noise such as figure captions, video or ad notices, greetings, "write this down" asides and repeated headings.
+- A box has at most 10 children. Source lists of 10 or fewer stay together. Split larger sets into standard subgroups and keep the source order inside each.
+- Boxes are keywords of 1 to 5 words (up to 9 only when needed). Never write sentences.
+- Use outside knowledge only THROUGH the outline. Before writing, silently use everything you know (and web search, if you have it) to fix obvious typos and OCR errors, standardize names, spellings, formulas and abbreviations, verify shaky facts, choose the standard grouping and order for the topic, and decide which items are true siblings and which belong in a chain. This knowledge may change only grouping, order, labels and merging, and it must appear as outline lines. Never write explanations, citations, links or notes.
+- Do not add facts the source lacks. The only exception is a short standard group label that organizes items the source already lists.
+- If the source contradicts reliable references, keep the source's wording and add one child line "⚠check" (ascii mode: "check") under that box.
+- Never reverse or soften a fact. A negative stays negative (for example "not required" must not become "required"). Qualifiers such as "less", "only", "never", "before" and "after" must survive as a chain or a symbol.
+
+### 9. Symbol shorthand (less wordy)
+Replace connecting words with these symbols wherever the parser keeps them (rules below).
+= is, equals, means, same as, defined as
+≠ not, different from, unlike, opposite
++ and, plus, also, with, in addition, as well as
+− minus, without, lacking, less, negative (this is the minus sign, never an ASCII hyphen)
+→ leads to, causes, results in, then, becomes, produces
+← caused by, comes from, because of, due to
+↔ relates to, interacts with, mutual, exchange, between
+↑ increase, rise, grow, more, higher, improve, boost
+↓ decrease, fall, less, lower, decline, reduce
+& and, together, combined with
+@ at, location, about, regarding
+✓ done, correct, true, yes, agreed, confirmed
+✗ wrong, false, no, rejected, failed, prohibited
+< less than, smaller, before, fewer, subset of
+> greater than, more than, after, larger, includes
+w/ with
+w/o without
+e.g. for example
+i.e. that is, meaning
+Tags (short category labels, used only when the source stresses the idea):
+⚡ fast, sudden, energy, power, trigger, shock
+⚖ balance, fairness, law, justice, tradeoff, compare
+⏳ time, delay, waiting, slow, long-term, history
+🔑 key, essential, critical, main point, solution
+⚠ risk, danger, problem, limitation, caution
+🎯 goal, aim, target, purpose, objective
+🔄 cycle, repeat, process, loop, feedback, routine
+⛔ ban, stop, prevent, prohibited, barrier
+🔗 linked, connected, depends on, related to
+⚙ mechanism, how it works, system, function, method
+💡 idea, insight, innovation, concept, realization
+👁 observe, see, awareness, monitor, visible, perception
+
+Parser-safe placement rules:
+1. The parser deletes a symbol that stands alone as a word at the START or END of a line, and deletes a line made only of symbols. Never rely on those positions. Never start a line with a bare "= " or "+ " or "@ " followed by a space.
+2. A symbol survives only (a) in the MIDDLE of a short plain phrase with no entity trigger ("heat → light"), or (b) GLUED with no space to the front of the first word of a plain line: "↑Pressure", "→Expansion", "⚠Risk", "⚙Mechanism", "=Process Worked". After a glued symbol, hyphen-glue a multi-word label: "↓Blood-Sugar".
+3. If the line is an entity line (digits, a Title Case phrase, a dictionary noun), a symbol on it would be cut away and lost. Skip it there. The nesting already shows the relation, and a cue label from section 6 (Aka, Eg, Result) can carry the meaning instead.
+4. Never put a symbol between two entities on one line. It vanishes and they become siblings. Nest them instead.
+5. A symbol before a number is lost too. Write comparisons as a plain word line above the number ("Above", then nested "2 g").
+6. Do not decorate every line. Use a symbol only when it replaces words. Never use stray symbols such as $ or random emoji.
+ASCII mode ("SYMBOLS: ascii", PDF-safe): use only = + & @ < > w/ w/o e.g. i.e. and the arrows -> <- <->, and only in the middle of a phrase. Replace everything else with a short word (inc, dec, yes, no) and use no emoji.
+
+### 10. Silent quality check before you output
+Verify each point, fix any failure, then output:
+1. Line 1 is "# Title". No heading deeper than "####". No blank line inside a tree. Indentation is exactly 2 spaces per level.
+2. No line ends with a colon. No line contains a comma, semicolon, colon, dash or parenthesis. No line has a rule trigger word. No line is a sentence or over 9 words.
+3. No line mixes a digit with a non-unit word. No lone-letter line. No line begins or ends with a small word.
+4. Every named item is ONE box with its facts as a chain or child labels beneath it. No item's facts are scattered across separate headings.
+5. No duplicate box under the same parent. No orphan stub that belongs to a neighbor. No fragment that only makes sense with the line above.
+6. Every fact, number, unit, name, example and warning in the source appears exactly once at the correct parent. Child counts match any count the source states. No fact is reversed.
+7. Spelling, capitalization and abbreviations are consistent and correct. No typos, no stray symbols, no extra main branches.
+8. The same kind of fact uses the same cue label everywhere.
+
+### Examples (source, then output)
+"Corn syrup has three ingredients which are coal tar, hotdogs and fish" and "Hotdogs, coal tar and fish are the three ingredients of corn syrup" both give:
+- Corn Syrup
+  - Ingredients
+    - Coal Tar
+    - Hotdogs
+    - Fish
+
+"Insulin lowers blood sugar" gives:
+- Insulin
+  - ↓Blood-Sugar
+
+"Heat causes expansion, which causes cracking" gives:
+- Heat
+  - →Expansion
+    - →Cracking
+
+"Antibiotic misuse is a risk because it causes resistance" gives:
+- Antibiotic Misuse
+  - ⚠Risk
+    - →Resistance
+
+"Add two drops of Molisch reagent, then pour twenty drops of concentrated sulfuric acid down a slanted tube. A positive result is a purple ring at the junction of two liquids." gives:
+- Procedure
+  - Add Molisch Reagent
+    - Two drops
+    - Pour Concentrated Sulfuric Acid
+      - Twenty drops
+      - Slanted tube
+- Positive Result
+  - Purple ring
+    - Junction of Two Liquids
+
+MULTI-ITEM SECTION (each item is a box with its own chain, same labels in the same order):
+Source: "There are two brewing methods. Espresso, also called short black, uses a fine grind and 93 °C water for 30 seconds, giving a strong concentrated cup. French Press uses a coarse grind and steeps for 4 minutes. Oversteeping gives a bitter taste. Both are served hot."
+gives:
+## Brewing Methods
+### Two Methods
+- Espresso
+  - Aka Short Black
+  - Grind
+    - Fine
+  - Water Temperature
+    - 93 °C
+  - Time
+    - 30 seconds
+  - Result
+    - Strong
+    - Concentrated
+- French Press
+  - Grind
+    - Coarse
+  - Steep Time
+    - 4 minutes
+  - ⚠Risk
+    - Oversteeping
+      - →Bitter taste
+### Shared Trait
+- Served Hot
+
+GRAFTING AND HEADING DEPTH (a sub-topic announced later becomes a child, not a new main branch):
+Source: "Contracts have three elements. The first is offer, the second is acceptance, the third is consideration. Within consideration, there are two kinds: past consideration, which is not valid, and executed consideration, which is valid. Examples of invalid past consideration are rewards promised after the act."
+gives:
+## Contracts
+### Three Elements
+#### Offer
+#### Acceptance
+#### Consideration
+- Two Kinds
+  - Past Consideration
+    - ✗Not valid
+    - Eg
+      - Reward Promised After Act
+  - Executed Consideration
+    - ✓Valid
+
+STATEMENT CHAIN WITH LABELS (cause, effect, warning, example, abbreviation):
+Source: "Photosynthesis, abbreviated PS, converts light energy into chemical energy inside chloroplasts. Too little light slows it down. Examples of pigments involved are chlorophyll a and chlorophyll b."
+gives:
+## Photosynthesis
+- Aka PS
+- Converts Light Energy
+  - →Chemical Energy
+    - Location
+      - Chloroplasts
+- ↓Light
+  - →↓Rate
+- Pigments Involved
+  - Eg
+    - Chlorophyll A
+    - Chlorophyll B
+
+### Output format
+Provide ONLY the final outline inside one markdown code block. No explanations or text outside it.
+
+### Input Study Material:
+[xxxxx]`,
         7: `[PLACEHOLDER PROMPT 7: Put your custom ChatGPT prompt text here]`,
         8: `[PLACEHOLDER PROMPT 8: Put your custom ChatGPT prompt text here]`,
         9: `[PLACEHOLDER PROMPT 9: Put your custom ChatGPT prompt text here]`
